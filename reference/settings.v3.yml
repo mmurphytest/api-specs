@@ -2016,31 +2016,33 @@ components:
     StorefrontProductSettings:
       type: object
       properties:
-        default_preorder_message:
-          type: string
-          example: preorder message
+        show_product_price:
+          type: boolean
+        show_product_sku:
+          type: boolean
+        show_product_weight:
+          type: boolean
+        show_product_brand:
+          type: boolean
+        show_product_shipping:
+          type: boolean
+        show_product_rating:
+          type: boolean
         show_add_to_cart_link:
           type: boolean
-        show_add_to_cart_qty_box:
-          type: boolean
-        show_add_to_wishlist:
-          type: boolean
+        default_preorder_message:
+          type: string
+          example: Preorder message
         show_breadcrumbs_product_pages:
           type: string
           enum:
             - show_one
             - show_none
-        show_product_brand:
+        show_add_to_cart_qty_box:
           type: boolean
-        show_product_price:
+        show_add_to_wishlist:
           type: boolean
-        show_product_rating:
-          type: boolean
-        show_product_shipping:
-          type: boolean
-        show_product_sku:
-          type: boolean
-        show_product_weight:
+        hide_price_from_guest:
           type: boolean
       title: StorefrontProductSettings
       x-tags:
