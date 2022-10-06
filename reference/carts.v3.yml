@@ -429,7 +429,7 @@ paths:
 
         If the product has modifiers, omit the `variant_id` and instead use the `option_selections` array to describe both the **variant** and the **modifier** selections.
 
-        If a variant needs to be changed or updated, the product will need to be removed and re-added to the cart with the correct variants using the Add Cart Line Items endpoint.
+        If a variant needs to be changed or updated, the product will need to be removed and re-added to the cart with the correct variants using the **Add Cart Line Items** endpoint.
 
         `custom_items` cannot be updated via the API at this time. To update your cart, add a new updated custom item and delete the outdated one. If your cart contains only one line item, perform the add operation before the delete operation.
 
@@ -1002,7 +1002,7 @@ components:
           properties:
             name:
               type: string
-              description: Given name for a gift certificate line item.
+              description: Given name for the gift certificate line item.
             theme:
               type: string
               description: The theme of the gift certificate. The following options are available:`Birthday`, `Boy`, `Celebration`, `Christmas`, `General`, and `Girl`.
@@ -1060,7 +1060,7 @@ components:
             properties:
               name:
                 type: string
-                description: Given name for a gift certificate line item.
+                description: Given name for the gift certificate line item.
               theme:
                 type: string
                 description: The theme of the gift certificate. The following options are available:`Birthday`, `Boy`, `Celebration`, `Christmas`, `General`, and `Girl`.
@@ -1297,7 +1297,7 @@ components:
           format: UUID
         parent_id:
           type: string
-          description: Bundled items will have their parent’s item Id.
+          description: Bundled items will have the ID of their parent item.
         customer_id:
           description: ID of the customer to which the cart belongs.
           type: integer
@@ -1358,7 +1358,7 @@ components:
                 type: number
                 description: The discounted amount.
         line_item:
-          type: object
+          $ref: '#/components/schemas/LineItem'
         created_time:
           type: string
           format: ISO-8601
@@ -1408,13 +1408,13 @@ components:
     LineItem:
       type: object
       title: Line Item
+      x-internal: false
       properties:
         physical_items:
           type: array
           items:
             allOf:
-              - type: object
-                title: Base Item
+              - title: Base Item
                 properties:
                   id:
                     type: string
@@ -1448,7 +1448,7 @@ components:
                   is_taxable:
                     type: boolean
                     example: false
-                    description: Boolean value that specifies whether the item is taxable or not.
+                    description: Boolean value that specifies whether the item is taxable.
                   image_url:
                     type: string
                     format: uri
@@ -1501,7 +1501,7 @@ components:
                                 id:
                                   type: integer
                                   example: 6
-                                  description: Coupon ID.
+                                  description: The ID of the coupon.
                                 code:
                                   type: string
                                   example: KV56053388J
@@ -1552,7 +1552,7 @@ components:
                     description: An item’s original price is the same as the product default price in the admin panel.
                   list_price:
                     type: number
-                    description: 'The net item price before discounts and coupons. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
+                    description: 'The net item price before discounts and coupons are applied. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
                   sale_price:
                     type: number
                     description: Price of the item after all discounts are applied. (The final price before tax calculation.)
@@ -1567,6 +1567,7 @@ components:
                     type: array
                     items:
                       type: object
+                      title: Product Option
                       properties:
                         name:
                           type: string
@@ -1579,17 +1580,18 @@ components:
                           description: 'The product option value; for example, Red or Medium.'
                         valueId:
                           type: number
-                          description: The product option value identifier.
-                      title: Product Option
+                          description: The product option value identifier in number format.
+                          example: 128
                 required:
                   - variant_id
                   - product_id
                   - quantity
-              - type: object
-                properties:
+              - properties:
                   is_require_shipping:
                     type: boolean
                   gift_wrapping:
+                    title: Gift Wrapping
+                    type: object
                     properties:
                       name:
                         type: string
@@ -1598,14 +1600,13 @@ components:
                       amount:
                         type: number
                         format: float
-                    title: Gift Wrapping
             title: Item Physical
+            type: object
         digital_items:
           type: array
           items:
             allOf:
-              - type: object
-                title: Base Item
+              - title: Base Item
                 properties:
                   id:
                     type: string
@@ -1639,7 +1640,7 @@ components:
                   is_taxable:
                     type: boolean
                     example: false
-                    description: Whether the item is taxable.
+                    description: Boolean value that specifies whether the item is taxable.
                   image_url:
                     type: string
                     format: uri
@@ -1692,7 +1693,7 @@ components:
                                 id:
                                   type: integer
                                   example: 6
-                                  description: Coupon ID.
+                                  description: The ID of the coupon.
                                 code:
                                   type: string
                                   example: KV56053388J
@@ -1758,6 +1759,7 @@ components:
                     type: array
                     items:
                       type: object
+                      title: Product Option
                       properties:
                         name:
                           type: string
@@ -1770,14 +1772,13 @@ components:
                           description: 'The product option value; for example, Red or Medium.'
                         valueId:
                           type: number
-                          description: The product option value identifier.
-                      title: Product Option
+                          description: The product option value identifier in number format.
+                          example: 128
                 required:
                   - variant_id
                   - product_id
                   - quantity
-              - type: object
-                properties:
+              - properties:
                   download_file_urls:
                     description: URLs to download all product files.
                     type: array
@@ -1789,18 +1790,15 @@ components:
                     type: string
                     format: url
                   download_size:
-                    description: 'Combined download size, in human-readable style. E.g.: `30MB`.'
+                    description: 'Specifies the combined download size of all files, in human-readable style, for example: 30MB.'
                     type: string
             title: Item Digital
+            type: object
         gift_certificates:
           type: array
           items:
             type: object
-            required:
-              - sender
-              - recipient
-              - amount
-              - theme
+            title: Item Gift Certificate
             properties:
               id:
                 type: string
@@ -1833,8 +1831,12 @@ components:
                     type: string
               message:
                 type: string
-                description: Limited to 200 characters.
-            title: Item Gift Certificate
+                description: The message included in the gift certificate is limited to 200 characters.
+            required:
+              - theme
+              - amount
+              - sender
+              - recipient
         virtual_items:
           type: array
           items:
@@ -1854,16 +1856,34 @@ components:
                 description: SKU of the custom item.
               name:
                 type: string
-                description: Item name.
+                description: Name of the custom item.
               quantity:
                 type: string
               list_price:
                 type: string
-                description: 'Price of the item. With or without tax, depending on your store’s setup. Optional price override.'
+                description: 'Specifies the price of the item. This value can include or exclude tax, depending on the setup of your store.'
+        custom_items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: ID of the custom item.
+              sku:
+                type: string
+                description: SKU of the custom item.
+              name:
+                type: string
+                description: Name of the custom item.
+              quantity:
+                type: string
+              list_price:
+                type: string
+                description: 'Specifies the price of the item. This value can include or exclude tax, depending on the setup of your store.'
       required:
         - physical_items
         - digital_items
-      x-internal: false
     ItemGiftCertificate:
       type: object
       required:
@@ -1876,7 +1896,7 @@ components:
           type: string
         name:
           type: string
-          description: Provided name that will appear in the control panel.
+          description: Name provided for the gift certificate that will appear in the control panel.
         theme:
           type: string
           description: The theme of the gift certificate. The following options are available:`Birthday`, `Boy`, `Celebration`, `Christmas`, `General`, and `Girl`.
@@ -2005,7 +2025,7 @@ components:
                           id:
                             type: integer
                             example: 6
-                            description: Coupon ID
+                            description: ID of the coupon.
                           code:
                             type: string
                             example: KV56053388J
@@ -2083,7 +2103,8 @@ components:
                     description: 'The product option value; for example, Red or Medium.'
                   valueId:
                     type: number
-                    description: The product option value identifier.
+                    description: The product option value identifier in number format.
+                    example: 128
                 title: Product Option
           required:
             - variant_id
@@ -2102,7 +2123,7 @@ components:
               type: string
               format: url
             download_size:
-              description: 'Combined download size, in human-readable style. E.g.: `30MB`.'
+              description: 'Combined download size, in human-readable style, for example: `30MB`.'
               type: string
       title: Item Digital
       x-internal: false
@@ -2237,7 +2258,7 @@ components:
                       - coupon_code
             discount_amount:
               type: number
-              description: The total value of all discounts applied to this item. This includes coupons and cart-level discounts.
+              description: The total value of all discounts applied to this item. This includes coupons and cart level discounts.
               example: 4
             coupon_amount:
               type: number
@@ -2274,7 +2295,8 @@ components:
                     description: 'The product option value; for example, Red or Medium.'
                   valueId:
                     type: number
-                    description: The product option value identifier.
+                    description: The product option value identifier in number format.
+                    example: 128
                 title: Product Option
           required:
             - variant_id
@@ -2385,7 +2407,7 @@ components:
                       id:
                         type: integer
                         example: 6
-                        description: The coupon ID.
+                        description: The ID of the coupon.
                       code:
                         type: string
                         example: KV56053388J
@@ -2426,7 +2448,7 @@ components:
                   - coupon_code
         discount_amount:
           type: number
-          description: The total value of all discounts applied to this item. This includes coupons and cart-level discounts.
+          description: The total value of all discounts applied to this item. This includes coupons and cart level discounts.
           example: 4
         coupon_amount:
           type: number
@@ -2436,7 +2458,7 @@ components:
           description: An item’s original price is the same as the product default price in the admin panel.
         list_price:
           type: number
-          description: 'The net item price before discounts and coupons. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
+          description: 'The net item price before discounts and coupons are applied. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
         sale_price:
           type: number
           description: Item’s price after all discounts are applied. (The final price before tax calculation.)
@@ -2463,7 +2485,8 @@ components:
                 description: 'The product option value; for example, Red or Medium.'
               valueId:
                 type: number
-                description: The product option value identifier.
+                description: The product option value identifier in number format.
+                example: 128
             title: Product Option
       required:
         - variant_id
@@ -2472,6 +2495,8 @@ components:
       x-internal: false
     ProductOption:
       type: object
+      title: Product Option
+      x-internal: false
       properties:
         name:
           type: string
@@ -2484,9 +2509,8 @@ components:
           description: 'The product option value; for example, Red or Medium.'
         valueId:
           type: number
-          description: The product option value identifier.
-      title: Product Option
-      x-internal: false
+          description: The product option value identifier in number format.
+          example: 128
     AppliedCoupon:
       title: Applied Coupon
       type: object
@@ -2556,20 +2580,20 @@ components:
       type: object
       title: Item Custom
       description: |-
-        Add a custom item to the shoppers cart.
+        Add a custom item to the shopper's cart.
 
         * Custom items are not added to the catalog.
         * The price should be set to match the store settings for taxes.
       properties:
         id:
           type: string
-          description: Id of the custom item.
+          description: ID of the custom item.
         sku:
           type: string
           description: SKU of the custom item.
         name:
           type: string
-          description: Item name.
+          description: Name of the item.
         quantity:
           type: string
         list_price:
@@ -2792,7 +2816,7 @@ components:
               message:
                 type: string
                 maximum: 200
-                description: 'Message shown to recipient, as provided by sender.'
+                description: Message shown to recipient, as provided by sender.
             required:
               - name
               - theme
