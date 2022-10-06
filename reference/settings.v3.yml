@@ -2042,7 +2042,7 @@ components:
           type: boolean
         show_add_to_wishlist:
           type: boolean
-        hide_price_from_guest:
+        hide_price_from_guests:
           type: boolean
       title: StorefrontProductSettings
       x-tags:
