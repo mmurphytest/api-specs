@@ -42,8 +42,6 @@ jobs:
         run: |
           echo "One or more files in the docs folder has changed."
           echo "List all the files that have changed: ${{ steps.changed-files-specific.outputs.all_changed_files }}"
-
-
   list-manifests:
     runs-on: ubuntu-latest
     outputs:
@@ -61,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2   
       - run: |
-          echo ${{ martix.manifest }}
+          echo ${{ matrix.manifest }}
 
       # Runs a single command using the runners shell
       # - name: Run Portman
