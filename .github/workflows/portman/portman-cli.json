@@ -1,0 +1,6 @@
+{
+  "includeTests": true,
+  "syncPostman": true,
+  "runNewman": false,
+  "portmanConfigFile": "./portmanConfig.json"
+}
