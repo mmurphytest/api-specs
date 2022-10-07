@@ -59,7 +59,7 @@ jobs:
           echo "::set-output name=matrix::$(ls ${{needs.get-changed-files.outputs.changed_files}} | jq -R -s -c 'split("\n")[:-1]')"
 
   check:
-    needs: list-manifests
+    needs: [list-manifests, get-changed-files]      
     if: ${{ needs.get-changed-files.outputs.any_changed }} == 'true'
     runs-on: ubuntu-latest
     strategy:
