@@ -64,11 +64,12 @@ jobs:
     needs: [list-manifests, get-changed-files]      
     # if: needs.get-changed-files.outputs.any_changed == true
     runs-on: ubuntu-latest
-    # strategy:
-    #     matrix:
-    #         manifest: ${{ fromJson(needs.list-manifests.outputs.matrix) }}
+    strategy:
+        matrix:
+            manifest: ${{ fromJson(needs.list-manifests.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v2           
+      - uses: actions/checkout@v2
+      # - run: npx @apideck/portman -l ${{ matrix.manifest }} --syncPostman=true --postmanWorkspaceName=dev-docs-team --cliOptionsFile ./portman/portman-cli.json            
       - run: |
           echo ${{ matrix.manifest }}
 

@@ -15,12 +15,7 @@ paths:
       tags:
         - Cart
       summary: Get a Cart
-      description: |-
-        Returns a *Cart*.
 
-        <!-- theme: info -->
-        > #### Note
-        > The Send a Test Request feature is not currently supported for this endpoint.
       operationId: getACart
       parameters:
         - $ref: '#/components/parameters/include'

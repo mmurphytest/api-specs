@@ -1,0 +1,139 @@
+{
+  "version": 1.0,
+  "globals": {
+    "collectionPreRequestScripts": [
+      "pm.collectionVariables.set('status', pm.iterationData.get('status') || 'open')"
+    ],
+    "keyValueReplacements": {
+      "store_hash": "{{store_hash}}",
+      "<API Key>": "{{x-auth-token}}"
+    }
+  },
+  "overwrites": [
+    {
+      "openApiOperationId": "CustomersGet",
+      "overwriteRequestQueryParams": [
+        {
+          "key": "limit",
+          "disable": true
+        },
+        {
+          "key": "cursor",
+          "disable": true
+        },
+        {
+          "key": "page",
+          "disable": true
+        },
+        {
+          "key": "limit",
+          "disable": true
+        },
+        {
+          "key": "id:in",
+          "disable": true
+        },
+        {
+          "key": "company:in",
+          "disable": true
+        },
+        {
+          "key": "customer_group_id:in",
+          "disable": true
+        },
+        {
+          "key": "date_created",
+          "disable": true
+        },
+        {
+          "key": "date_created:max",
+          "disable": true
+        },
+        {
+          "key": "date_created:min",
+          "disable": true
+        },
+        {
+          "key": "date_modified",
+          "disable": true
+        },
+        {
+          "key": "date_modified:min",
+          "disable": true
+        },
+        {
+          "key": "date_modified:max",
+          "disable": true
+        },
+        {
+          "key": "email:in",
+          "disable": true
+        },
+        {
+          "key": "name:in",
+          "disable": true
+        },
+        {
+          "key": "name:like",
+          "disable": true
+        },
+        {
+          "key": "registration_ip_address:in",
+          "disable": true
+        },
+        {
+          "key": "include",
+          "disable": true
+        },
+        {
+          "key": "sort",
+          "disable": true
+        }
+      ]
+    }
+  ],
+  "tests": {
+    "contractTests": [
+      {
+        "openApiOperation": "*::/*",
+        "statusSuccess": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "responseTime": {
+          "enabled": false,
+          "maxMs": 300
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "contentType": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "jsonBody": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "schemaValidation": {
+          "enabled": true
+        }
+      },
+      {
+        "openApiOperation": "*::/*",
+        "headersPresent": {
+          "enabled": true
+        }
+      }
+    ],
+    "contentTests": [],
+    "extendTests": [],
+    "variationTests": []
+  }
+}
