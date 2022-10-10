@@ -1987,7 +1987,7 @@ components:
               type: string
         message:
           type: string
-          description: Limited to 200 characters.
+          description: The message included in the gift certificate is limited to 200 characters.
     ContactEntity:
       title: Contact Entity
       type: object
@@ -2439,7 +2439,7 @@ components:
                   ```
                 properties:
                   id:
-                    description: ID of the applied discount.
+                    description: ID of the applied discount. 
                     example: coupon
                     oneOf:
                       - type: string
@@ -2464,7 +2464,7 @@ components:
                           id:
                             type: integer
                             example: 6
-                            description: The coupon ID.
+                            description: The ID of the coupon.
                           code:
                             type: string
                             example: KV56053388J
@@ -2496,7 +2496,7 @@ components:
                           expiresDate:
                             type: integer
                             example: 0
-                            description: Returns 0 if no expiration date has been set.
+                            description: Returns 0 if no expiration date is set.
                           totalDiscount:
                             type: number
                             example: 4.19
@@ -2505,7 +2505,7 @@ components:
                       - coupon_code
             discount_amount:
               type: number
-              description: The total value of all discounts applied to this item. This includes coupons and cart level discounts.
+              description: The total value of all discounts applied to this item. This includes coupons and cart-level discounts.
               example: 4
             coupon_amount:
               type: number
@@ -2515,10 +2515,10 @@ components:
               description: An item’s original price is the same as the product default price in the admin panel.
             list_price:
               type: number
-              description: 'The net item price before discounts and coupons. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
+              description: 'The net item price before discounts and coupons are applied. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
             sale_price:
               type: number
-              description: Item’s price after all discounts are applied. (The final price before tax calculation.)
+              description: Price of the item after all discounts are applied. (The final price before tax calculation.)
             extended_list_price:
               type: number
               description: List price of the item multiplied by the quantity.
@@ -2530,6 +2530,7 @@ components:
               type: array
               items:
                 type: object
+                title: Product Option
                 properties:
                   name:
                     type: string
@@ -2544,16 +2545,16 @@ components:
                     type: number
                     description: The product option value identifier in number format.
                     example: 128
-                title: Product Option
           required:
             - variant_id
             - product_id
             - quantity
-        - type: object
-          properties:
+        - properties:
             is_require_shipping:
               type: boolean
             gift_wrapping:
+              title: Gift Wrapping
+              type: object
               properties:
                 name:
                   type: string
@@ -2562,9 +2563,8 @@ components:
                 amount:
                   type: number
                   format: float
-              title: Gift Wrapping
       title: Item Physical
-      x-internal: false
+      type: object
     ItemPhysicalGet:
       allOf:
         - title: Base Item
@@ -2654,7 +2654,7 @@ components:
                           id:
                             type: integer
                             example: 6
-                            description: The coupon ID.
+                            description: The ID of the coupon.
                           code:
                             type: string
                             example: KV56053388J
@@ -2686,14 +2686,14 @@ components:
                           expiresDate:
                             type: integer
                             example: 0
-                            description: Returns 0 if no expiration date has been set.
+                            description: Returns 0 if no expiration date is set.
                           totalDiscount:
                             type: number
                             example: 4.19
                             description: The total amount of all discounts applied to the cart.
             discount_amount:
               type: number
-              description: The total value of all discounts applied to this item. This includes coupons and cart level discounts.
+              description: The total value of all discounts applied to this item. This includes coupons and cart-level discounts.
               example: 4
             coupon_amount:
               type: number
@@ -2703,10 +2703,10 @@ components:
               description: An item’s original price is the same as the product default price in the admin panel.
             list_price:
               type: number
-              description: 'The net item price before discounts and coupons. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
+              description: 'The net item price before discounts and coupons are applied. BigCommerce derives an item’s list price from the product default price or, if applicable, the sale price configured in the admin panel.'
             sale_price:
               type: number
-              description: Item’s price after all discounts are applied. (The final price before tax calculation.)
+              description: Price of the item after all discounts are applied. (The final price before tax calculation.)
             extended_list_price:
               type: number
               description: List price of the item multiplied by the quantity.
@@ -2738,8 +2738,17 @@ components:
               type: boolean
             gift_wrapping:
               title: Gift Wrapping
+              type: object
+              properties:
+                name:
+                  type: string
+                message:
+                  type: string
+                amount:
+                  type: number
+                  format: float
       title: Item Physical
-      x-internal: false
+      description: '`GET`'
       type: object
     BaseItem:
       type: object
