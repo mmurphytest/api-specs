@@ -1887,7 +1887,7 @@ components:
         - digital_items
     LineItems:
       type: object
-      title: Line Items
+      title: line_items
       x-internal: false
       properties:
         physical_items:
@@ -1909,6 +1909,7 @@ components:
       required:
         - physical_items
         - digital_items
+      description: Request body for `PUT` or `POST` requests.
     ItemGiftCertificate:
       type: object
       required:
@@ -2439,7 +2440,7 @@ components:
                   ```
                 properties:
                   id:
-                    description: ID of the applied discount. 
+                    description: ID of the applied discount.
                     example: coupon
                     oneOf:
                       - type: string
@@ -3016,6 +3017,7 @@ components:
 
         * Custom items are not added to the catalog.
         * The price should be set to match the store settings for taxes.
+      x-internal: false
       properties:
         id:
           type: string
@@ -3030,8 +3032,7 @@ components:
           type: string
         list_price:
           type: string
-          description: 'Price of the item, with or without tax, depending on your store’s setup.'
-      x-internal: false
+          description: 'Specifies the price of the item. This value can include or exclude tax, depending on the setup of your store.'
     ItemCustomGet:
       type: object
       title: Item Custom
@@ -3040,6 +3041,7 @@ components:
 
         * Custom items are not added to the catalog.
         * The price should be set to match the store settings for taxes.
+      x-internal: false
       properties:
         id:
           type: string
@@ -3054,8 +3056,7 @@ components:
           type: string
         list_price:
           type: string
-          description: 'Price of the item, with or without tax, depending on your store’s setup.'
-      x-internal: false
+          description: 'Specifies the price of the item. This value can include or exclude tax, depending on the setup of your store.'
     cart_PostVariant:
       type: object
       title: cart_PostVariant
