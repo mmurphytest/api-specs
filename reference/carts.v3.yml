@@ -1358,7 +1358,7 @@ components:
                 type: number
                 description: The discounted amount.
         line_items:
-          $ref: '#/components/schemas/LineItems'
+          $ref: '#/components/schemas/LineItemsGet'
         created_time:
           type: string
           format: ISO-8601
