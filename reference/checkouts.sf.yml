@@ -5,7 +5,10 @@ info:
     Stencil-powered storefronts.
   version: ""
 servers:
-- url: https://{$$.env.store_domain}/api/storefront
+  - url: https://{store_domain}/api/storefront
+    variables:
+        store_domain:
+          default: example.com
 tags:
 - name: Checkout
 - name: Checkout Billing Address
