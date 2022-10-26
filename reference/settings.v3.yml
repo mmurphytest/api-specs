@@ -1362,7 +1362,7 @@ paths:
         - Storefront Status
   '/stores/{store_hash}/v3/settings/inventory':
     get:
-      summary: Get Inventory Settings
+      summary: Get inventory settings
       tags:
         - Inventory
       responses:
