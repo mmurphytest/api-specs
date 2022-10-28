@@ -3731,6 +3731,40 @@ paths:
                       option_id: 220
                       option_display_name: Color
                 meta: {}
+              examples:
+                example-1:
+                  value:
+                    data:
+                      cost_price: 0
+                      price: 0
+                      sale_price: 0
+                      retail_price: 0
+                      weight: 0
+                      width: 0
+                      height: 0
+                      depth: 0
+                      is_free_shipping: true
+                      fixed_cost_shipping_price: 0
+                      purchasing_disabled: true
+                      purchasing_disabled_message: string
+                      upc: string
+                      inventory_level: 0
+                      inventory_warning_level: 0
+                      bin_picking_number: string
+                      mpn: string
+                      gtin: '012345678905'
+                      id: 0
+                      product_id: 0
+                      sku: string
+                      sku_id: 0
+                      option_values:
+                        - option_display_name: Color
+                          label: Beige
+                          id: 146
+                          option_id: 151
+                      calculated_price: 0
+                      calculated_weight: 0
+                    meta: {}
         '207':
           description: 'Multiple operations have taken place and the status for each operation can be viewed in the body of the response. Typically indicates that a partial failure has occured, such as when a `POST` or `PUT` request is successful, but saving the URL has failed.'
           content:
@@ -17317,6 +17351,21 @@ paths:
                   resource_type: product
                   value: 'Shelf 3, Bin 5'
                 meta: {}
+              examples:
+                example-1:
+                  value:
+                    data:
+                      date_created: '2018-05-07T20:14:17+00:00'
+                      date_modified: '2018-05-07T20:14:17+00:00'
+                      description: Location in the warehouse
+                      id: 6
+                      key: Location
+                      namespace: Warehouse Locations
+                      permission_set: app_only
+                      resource_id: 111
+                      resource_type: category
+                      value: 4HG
+                    meta: {}
         '409':
           description: |
             The `Metafield` was in conflict with another `Metafield`. This can be the result of duplicate unique key combination of the app's client id, namespace, key, resource_type, and resource_id.
@@ -21263,6 +21312,26 @@ components:
           example: '012345678905'
       description: Common Variant properties.
       x-internal: false
+      x-examples:
+        example-1:
+          cost_price: 0
+          price: 0
+          sale_price: 0
+          retail_price: 0
+          weight: 0
+          width: 0
+          height: 0
+          depth: 0
+          is_free_shipping: true
+          fixed_cost_shipping_price: 0
+          purchasing_disabled: true
+          purchasing_disabled_message: string
+          upc: string
+          inventory_level: 0
+          inventory_warning_level: 0
+          bin_picking_number: string
+          mpn: string
+          gtin: '012345678905'
     productVariant_Full:
       title: productVariant_Full
       allOf:
@@ -21292,6 +21361,38 @@ components:
             calculated_weight:
               type: number
       x-internal: false
+      description: ''
+      x-examples:
+        example-1:
+          cost_price: 0
+          price: 0
+          sale_price: 0
+          retail_price: 0
+          weight: 0
+          width: 0
+          height: 0
+          depth: 0
+          is_free_shipping: true
+          fixed_cost_shipping_price: 0
+          purchasing_disabled: true
+          purchasing_disabled_message: string
+          upc: string
+          inventory_level: 0
+          inventory_warning_level: 0
+          bin_picking_number: string
+          mpn: string
+          gtin: '012345678905'
+          id: 0
+          product_id: 0
+          sku: string
+          sku_id: 0
+          option_values:
+            - option_display_name: Color
+              label: Beige
+              id: 146
+              option_id: 151
+          calculated_price: -1.7976931348623157e+308
+          calculated_weight: 0
     productVariant_Post:
       title: productVariant_Post
       description: |
